@@ -41,25 +41,40 @@
 									<form>
 										<div class="form-title"><h6>Sign Up</h6></div>
 										<div class="form-group pos_rel">
-											<input id="full[name]" name="fullname" type="text" placeholder="Full name" class="form-control lgn_input" required="">
+											<input id="name" type="text" placeholder="Full name" class="form-control lgn_input" required="">
 											<i class="uil uil-user-circle lgn_icon"></i>
 										</div>
 										<div class="form-group pos_rel">
-											<input id="email[address]" name="emailaddress" type="email" placeholder="Email Address" class="form-control lgn_input" required="">
+											<input id="email"  type="email" placeholder="Email Address" class="form-control lgn_input" required="">
 											<i class="uil uil-envelope lgn_icon"></i>
 										</div>
 										<div class="form-group pos_rel">
-											<input id="phone[number]" name="phone" type="text" placeholder="Phone Number" class="form-control lgn_input" required="">
+											<input id="number" type="text" placeholder="Phone Number" class="form-control lgn_input" required="">
 											<i class="uil uil-mobile-android-alt lgn_icon"></i>
+										</div>
+
+										<div class="form-group pos_rel">
+											<input id="address" type="text" placeholder="Address" class="form-control lgn_input" required="">
+											<i class="uil uil-location-point lgn_icon"></i>
+										</div>
+
+										<div class="form-group pos_rel">
+											<input id="district" type="text" placeholder="District" class="form-control lgn_input" required="">
+											<i class="uil uil-location-pin-alt lgn_icon"></i>
+										</div>
+
+										<div class="form-group pos_rel">
+											<input id="postal_code" type="text" placeholder="Postal Code" class="form-control lgn_input" required="">
+											<i class="uil uil-postcard lgn_icon"></i>
 										</div>
 									
 										<div class="form-group pos_rel">
-											<input id="password1" name="password1" type="password" placeholder="Password" class="form-control lgn_input" required="">
+											<input id="password" type="password" placeholder="Password" class="form-control lgn_input" required="">
 											<i class="uil uil-padlock lgn_icon"></i>
                                         </div>
                                         
                                         <div class="form-group pos_rel">
-											<input id="password1" name="password1" type="password" placeholder="Retype Password" class="form-control lgn_input" required="">
+											<input id="retype_password"  type="password" placeholder="Retype Password" class="form-control lgn_input" required="">
 											<i class="uil uil-padlock lgn_icon"></i>
 										</div>
 										<button class="login-btn hover-btn" type="submit">Sign Up Now</button>
