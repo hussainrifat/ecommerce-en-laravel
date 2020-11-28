@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Providers\RouteServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +21,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::view("/login", "login");
 Route::view("/layout", "layout");
-Route::view("/", "home");
 Route::view("/sign_up", "registration.sign_up");
 Route::view('/sign_in', 'registration.sign_in');
 Route::view('/forgot_password', 'registration.forgot_password');
+Route::post('create_user','UserController@create_user');
+Route::post('login','UserController@login');
+
+Route::get('sign_out', 'UserController@sign_out');
+
+    Route::view("/", "home");
 
 
 

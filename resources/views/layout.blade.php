@@ -124,7 +124,7 @@
                             <a href="dashboard_my_addresses.html" class="item channel_item"><i class="uil uil-location-point icon__1"></i>My Address</a>
                             <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Offers</a>
                             <a href="faq.html" class="item channel_item"><i class="uil uil-info-circle icon__1"></i>Faq</a>
-                            <a href="sign_in.html" class="item channel_item"><i class="uil uil-lock-alt icon__1"></i>Logout</a>
+                            <a href="{{url('sign_out')}}" class="item channel_item"><i class="uil uil-lock-alt icon__1"></i>Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -156,7 +156,7 @@
                                         <a href="request_product.html" class="item channel_item page__links">Product Request</a>										
                                         <a href="order_placed.html" class="item channel_item page__links">Order Placed</a>										
                                         <a href="bill.html" class="item channel_item page__links">Bill Slip</a>										
-                                        <a href="sign_in.html" class="item channel_item page__links">Sign In</a>
+                                        <a href="{{url('sign_out')}}" class="item channel_item page__links">Sign In</a>
                                         <a href="sign_up.html" class="item channel_item page__links">Sign Up</a>
                                         <a href="forgot_password.html" class="item channel_item page__links">Forgot Password</a>
                                         <a href="contact_us.html" class="item channel_item page__links">Contact Us</a>

@@ -6,22 +6,22 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
+		<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 		
 		<title>Sign Up</title>
 		
-	
-     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
-     <link href='{{asset('resources')}}/frontend/vendor/unicons-2.0.1/css/unicons.css?{{time()}}' rel='stylesheet'>
-     <link href="{{asset('resources')}}/frontend/css/style.css?{{time()}}" rel="stylesheet">
-     <link href="{{asset('resources')}}/frontend/css/responsive.css?{{time()}}" rel="stylesheet">
-     
-     <!-- Vendor Stylesheets -->
-     <link href="{{asset('resources')}}/frontend/vendor/fontawesome-free/css/all.min.css?{{time()}}" rel="stylesheet">
-     <link href="{{asset('resources')}}/frontend/vendor/bootstrap/css/bootstrap.min.css?{{time()}}" rel="stylesheet">
-     <link rel="stylesheet" type="text/css" href="{{asset('resources')}}/frontend/vendor/semantic/semantic.min.css?{{time()}}">	
-
-
-
+		<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+		<link href='{{asset('resources')}}/frontend/vendor/unicons-2.0.1/css/unicons.css?{{time()}}' rel='stylesheet'>
+		<link href="{{asset('resources')}}/frontend/css/style.css?{{time()}}" rel="stylesheet">
+		<link href="{{asset('resources')}}/frontend/css/responsive.css?{{time()}}" rel="stylesheet">
+		
+		<!-- Vendor Stylesheets -->
+		<link href="{{asset('resources')}}/frontend/vendor/fontawesome-free/css/all.min.css?{{time()}}" rel="stylesheet">
+		<link href="{{asset('resources')}}/frontend/vendor/bootstrap/css/bootstrap.min.css?{{time()}}" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{asset('resources')}}/frontend/vendor/semantic/semantic.min.css?{{time()}}">	
+   
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
 	</head>
 
@@ -73,11 +73,11 @@
 											<i class="uil uil-padlock lgn_icon"></i>
                                         </div>
                                         
-                                        <div class="form-group pos_rel">
+                                        {{-- <div class="form-group pos_rel">
 											<input id="retype_password"  type="password" placeholder="Retype Password" class="form-control lgn_input" required="">
 											<i class="uil uil-padlock lgn_icon"></i>
-										</div>
-										<button class="login-btn hover-btn" type="submit">Sign Up Now</button>
+										</div> --}}
+										<button class="login-btn hover-btn" id="sign_up" type="button">Sign Up Now</button>
 									</form>
 								</div>
 								<div class="signup-link">
@@ -98,7 +98,8 @@
 	<script src="{{asset('resources')}}/js/registration.js?{{time()}}"></script>
 	<script src="{{asset('resources')}}/frontend/js/jquery-3.3.1.min.js?{{time()}}"></script>
 	<script src="{{asset('resources')}}/frontend/js/jquery.countdown.min.js?{{time()}}"></script>
-		
+	
+
 
 	
 	

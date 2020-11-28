@@ -42,20 +42,22 @@
 								<a href="{{url('/')}}"><img src="resources/frontend/images/logo.png" alt=""></a>
 								<a href="{{url('/')}}"><img class="logo-inverse" src="resources/frontend/images/dark-logo.png" alt=""></a>
 							</div>
+							<form action="login" method="POST"> 
+								@csrf
 							<div class="form-dt">
 								<div class="form-inpts checout-address-step">
 									
 							
 										<div class="form-title"><h6>Sign In</h6></div>
 										<div class="form-group pos_rel">
-											<input id="contact_number" type="text" placeholder="Enter Phone Number" class="form-control lgn_input" required="">
+											<input id="number" name="number" type="text" placeholder="Enter Phone Number" class="form-control lgn_input" required="">
 											<i class="uil uil-mobile-android-alt lgn_icon"></i>
 										</div>
 										<div class="form-group pos_rel">
-											<input id="password" type="password" placeholder="Enter Password" class="form-control lgn_input" required="">
+											<input id="password" name="password" type="password" placeholder="Enter Password" class="form-control lgn_input" required="">
 											<i class="uil uil-padlock lgn_icon"></i>
 										</div>
-										<button   type="button" id="login" class="login-btn hover-btn">Log In</button>
+										<button type="submit"  class="login-btn hover-btn">Log In</button>
 
 								</div>
 								<div class="password-forgor">
@@ -65,6 +67,7 @@
 									<p>Don't have an account? - <a href="{{url('sign_up')}}">Sign Up Now</a></p>
 								</div>
 							</div>
+						</form>
 						</div>
 					</div>
 					<div class="copyright-text text-center mt-3">
