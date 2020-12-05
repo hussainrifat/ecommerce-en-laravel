@@ -5,13 +5,13 @@ $(document).ready(function(){
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
 
-    $("#login").on("click", function () {
+    // $("#login").on("click", function () {
 
-        var number=$("#number").val();
+    //     var number=$("#number").val();
 
-        alert(number);
+    //     alert(number);
 
-    });
+    // });
 
 
     $("#sign_up").on("click", function () {
