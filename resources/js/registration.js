@@ -5,13 +5,7 @@ $(document).ready(function(){
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
 
-    // $("#login").on("click", function () {
-
-    //     var number=$("#number").val();
-
-    //     alert(number);
-
-    // });
+    
 
 
     $("#sign_up").on("click", function () {
@@ -52,5 +46,47 @@ $(document).ready(function(){
           });
 
     });
+
+
+
+
+    $("#forget_password").on("click", function () {
+
+      var email=$("#email").val();
+      var old_password=$("#old_password").val();
+      var new_password=$("#new_password").val();
+  
+
+      var formdata= new FormData;
+      formdata.append('email',email);
+      formdata.append('old_password',old_password);
+      formdata.append('new_password',new_password);
+
+
+      // alert(email+' '+old_password+' '+new_password);
+      $.ajax({
+          processData:false,
+          contentType:false,
+          data:formdata,
+          type:"post",
+          url:"reset_password",
+          success:function(data)
+          {
+            var msg= $.trim(data);
+            if(msg=='ok')
+            {
+              alert("Password Changed Successfully");
+              window.location.href ="sign_in";
+            }
+    
+            else 
+            alert("Old Password Doesn't Matched");
+
+         
+          }
+        });
+
+  });
+
 
 });

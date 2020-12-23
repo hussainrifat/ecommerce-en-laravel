@@ -5,7 +5,9 @@
 
     <meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=9">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>Esxence</title>
      <link rel="stylesheet" href="{{asset('resources')}}/css\header.css?{{time()}}">
 
@@ -38,11 +40,11 @@
     <div class="top-header-group">
         <div class="top-header">
             <div class="res_main_logo">
-                <a href="index.html"><img src="resources\frontend\images/dark-logo-1.svg" alt=""></a>
+                <a href="/"><img src="resources\frontend\images/dark-logo-1.svg" alt=""></a>
             </div>
             <div class="main_logo" id="logo">
-                <a href="{{url('/')}}"><img src="resources\frontend\images/logo.png" alt=""></a>
-                <a href="index.html"><img class="logo-inverse" src="resources\frontend\images/dark-logo.svg" alt=""></a>
+            <a href="{{url('/')}}"><img src="{{asset('resources\frontend\images/logo.png')}}" alt=""></a>
+                <a href="/"><img class="logo-inverse" src="{{asset('resources\frontend\images/logo.png')}}" alt=""></a>
             </div>
             <div class="select_location">
                 <div class="ui inline dropdown loc-title">
@@ -104,8 +106,10 @@
                     </li>	
                     <li class="ui dropdown">
                         <a href="#" class="opts_account">
-                            <img src="resources\frontend\images/avatar/img-5.jpg" alt="">
-                            <span class="user__name">John Doe</span>
+                            <img src="{{asset('resources\frontend\images/avatar/img-5.jpg')}}" alt="">
+                           
+
+                            <span class="user__name">{{Session::get('name')}}</span>
                             <i class="uil uil-angle-down"></i>
                         </a>
                         <div class="menu dropdown_account">
@@ -141,7 +145,7 @@
                     <button class="navbar-toggler menu_toggle_btn" type="button" data-target="#navbarSupportedContent"><i class="uil uil-bars"></i></button>
                     <div class="collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu" id="navbarSupportedContent">
                         <ul class="navbar-nav main_nav align-self-stretch">
-                            <li class="nav-item"><a href="index.html" class="nav-link active" title="Home">Home</a></li>
+                            <li class="nav-item"><a href="{{url('/')}}" class="nav-link active" title="Home">Home</a></li>
                             <li class="nav-item"><a href="shop_grid.html" class="nav-link new_item" title="New Products">New Products</a></li>
                             <li class="nav-item"><a href="shop_grid.html" class="nav-link" title="Featured Products">Featured Products</a></li>
                             <li class="nav-item">
@@ -184,8 +188,16 @@
             <div class="catey__icon">
                 <a href="#" class="cate__btn" data-toggle="modal" data-target="#category_model" title="Categories"><i class="uil uil-apps"></i></a>
             </div>
+
+
+            <?php 
+            use App\Http\Controllers\ProductController;
+            $total= ProductController::cartItem();
+            ?>
+
+
             <div class="header_cart order-1">
-                <a href="#" class="cart__btn hover-btn pull-bs-canvas-left" title="Cart"><i class="uil uil-shopping-cart-alt"></i><span>Cart</span><ins>2</ins><i class="uil uil-angle-down"></i></a>
+                <a href="" class="cart__btn hover-btn pull-bs-canvas-left" title="Cart"><i class="uil uil-shopping-cart-alt"></i><span>Cart</span><ins>{{$total}}</ins></a>
             </div>
             <div class="search__icon order-1">
                 <a href="#" class="search__btn hover-btn" data-toggle="modal" data-target="#search_model" title="Search"><i class="uil uil-search"></i></a>
@@ -286,19 +298,19 @@
 							<div class="footer-payments">
 								<ul id="paypal-gateway" class="financial-institutes">
 									<li class="financial-institutes__logo">
-									  <img alt="Visa" title="Visa" src="resources\frontend\images/footer-icons/pyicon-6.svg">
+									  <img alt="Visa" title="Visa" src="{{asset('resources\frontend\images/footer-icons/pyicon-6.svg')}}">
 									</li>
 									<li class="financial-institutes__logo">
-									  <img alt="Visa" title="Visa" src="resources\frontend\images/footer-icons/pyicon-1.svg">
+									  <img alt="Visa" title="Visa" src="{{asset('resources\frontend\images/footer-icons/pyicon-1.svg')}}">
 									</li>
 									<li class="financial-institutes__logo">
-									  <img alt="MasterCard" title="MasterCard" src="resources\frontend\images/footer-icons/pyicon-2.svg">
+									  <img alt="MasterCard" title="MasterCard" src="{{asset('resources\frontend\images/footer-icons/pyicon-2.svg')}}">
 									</li>
 									<li class="financial-institutes__logo">
-									  <img alt="American Express" title="American Express" src="resources\frontend\images/footer-icons/pyicon-3.svg">
+									  <img alt="American Express" title="American Express" src="{{asset('resources\frontend\images/footer-icons/pyicon-3.svg')}}">
 									</li>
 									<li class="financial-institutes__logo">
-									  <img alt="Discover" title="Discover" src="resources\frontend\images/footer-icons/pyicon-4.svg">
+									  <img alt="Discover" title="Discover" src="{{asset('resources\frontend\images/footer-icons/pyicon-4.svg')}}">
 									</li>
 								</ul>
 							</div>

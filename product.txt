@@ -1,0 +1,1 @@
+{"id":1,"product_name":"Mango","category_name":"Fruits","product_selling_price":"200","product_discount_price":"190","product_image":"product_image\/1607274697.jpg","product_description":"Mango","active_status":"0","created_at":"2020-12-06T17:11:37.000000Z","updated_at":"2020-12-06T17:11:37.000000Z"}

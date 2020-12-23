@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function create_user(Request $request){
+    public function createUser(Request $request){
         $name=$request->name;
         $email=$request->email;
         $number=$request->number;
@@ -33,7 +34,6 @@ class UserController extends Controller
 
     public function login(Request $req)
     {
-
         $credentials = array(
             'number' => $req->number,
             'password'=>$req->password
@@ -42,22 +42,50 @@ class UserController extends Controller
         $user= user::where(['number'=>$req->number])->first();
 
         if ($user) {
+
             if (auth()->attempt($credentials)) {
-                $user_id = $user->id;
-                Session::put('user_id',$user_id);
+                $id = Auth::user()->id;
+                $name= User::where('id',$id)->first()->name;
+                 Session::put('name',$name);
+
                 return redirect('/');
             }
 
             else{
-                session()->flash('message', 'Invalid credentials');
-                
-            }
+                return view('registration.sign_in');
+            }    
+    }
+    else{
+        return view('registration.sign_in');
     }
 
     }
 
-    public function sign_out(Request $request){
-        auth()->logout();
+
+
+    public function resetPassword(Request $request){
+        
+        $data= (user::where('email', $request->email)->first());
+
+           
+
+        if (Hash::check($request->old_password, $data['password'])) {
+            user::where('email', $request->email)->update(['password'=>Hash::make($request->new_password)]);
+
+            echo "ok";
+        }
+
+    else {
+        echo "not ok";
+    }
+
+    }
+
+
+
+    public function signOut(Request $request){
+        $request->session()->flush();
+
         return view('registration/sign_in');
     }
 

@@ -6,8 +6,9 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
-		
-		<title>Sign Up</title>
+		<meta name="csrf-token" content="{{ csrf_token() }}" />
+
+		<title>Reset Password</title>
 		
 	
      <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -20,6 +21,7 @@
      <link href="{{asset('resources')}}/frontend/vendor/bootstrap/css/bootstrap.min.css?{{time()}}" rel="stylesheet">
      <link rel="stylesheet" type="text/css" href="{{asset('resources')}}/frontend/vendor/semantic/semantic.min.css?{{time()}}">	
 
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 		
@@ -37,23 +39,23 @@
 								<a href="{{url('/')}}"><img class="logo-inverse" src="resources/frontend/images/dark-logo.png" alt=""></a>
 							</div>
 							<div class="form-dt">
+
 								<div class="form-inpts checout-address-step">
-									<form>
+									@csrf
 										<div class="form-title"><h6>Request a Password Reset</h6></div>
 										<div class="form-group pos_rel">
-											<input id="email[address]" name="emailaddress" type="email" placeholder="Your Email Address" class="form-control lgn_input" required="">
+											<input id="email"  type="email" placeholder="Your Email Address" class="form-control lgn_input" required="">
 											<i class="uil uil-envelope lgn_icon"></i>
 										</div>
 										<div class="form-group pos_rel">
-											<input id="password[old]" name="passwordold" type="password" placeholder="Enter Old Password" class="form-control lgn_input" required="">
+											<input id="old_password"  type="password" placeholder="Enter Old Password" class="form-control lgn_input" required="">
 											<i class="uil uil-padlock lgn_icon"></i>
 										</div>
 										<div class="form-group pos_rel">
-											<input id="password[new]" name="passwordnew" type="password" placeholder="Enter New Password" class="form-control lgn_input" required="">
+											<input id="new_password"  type="password" placeholder="Enter New Password" class="form-control lgn_input" required="">
 											<i class="uil uil-padlock lgn_icon"></i>
 										</div>
-										<button class="login-btn hover-btn" type="submit">Reset Password</button>
-									</form>
+										<button class="login-btn hover-btn" id="forget_password" type="button">Reset Password</button>
 								</div>
 								<div class="signup-link">
 									<p>Go Back - <a href="{{url('sign_in')}}">Sign In Now</a></p>
