@@ -32,7 +32,7 @@ Route::post('reset_password','UserController@resetPassword');
 Route::get('sign_out', 'UserController@signOut');
 
 // Route::view("/", "home");
-
+Route::get('data','productController@cartList' );
 
 // Admin Dashboard
 Route::view("/admin_dashboard", "admin.admin_dashboard");
@@ -50,11 +50,13 @@ Route::view("/add_category", "admin.add_category");
 Route::get('all_category','ProductController@allCategory');
 Route::post('add_new_category','ProductController@addNewCategory');
 Route::post('add_to_cart','ProductController@addToCart');
+Route::post('remove_from_cart','ProductController@removeFromCart');
 
 
 // Customer Dashboard
 Route::get('/','CustomerController@viewCustomerHome');
 Route::get('/product_view/{id}','CustomerController@showProductView');
+Route::view('/checkout','customer.checkout');
 
 Route::view('/demo_product','customerdemo_product');
 

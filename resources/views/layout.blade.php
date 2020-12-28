@@ -17,7 +17,7 @@
      <link href="{{asset('resources')}}/frontend/css/style.css?{{time()}}" rel="stylesheet">
      <link href="{{asset('resources')}}/frontend/css/responsive.css?{{time()}}" rel="stylesheet">
      <link href="{{asset('resources')}}/frontend/css/night-mode.css?{{time()}}" rel="stylesheet">
-     
+
      <!-- Vendor Stylesheets -->
      <link href="{{asset('resources')}}/frontend/vendor/fontawesome-free/css/all.min.css?{{time()}}" rel="stylesheet">
      <link href="{{asset('resources')}}/frontend/vendor/OwlCarousel/assets/owl.carousel.css?{{time()}}" rel="stylesheet">
@@ -37,6 +37,12 @@
 
 <!-- Header Start -->
 <header class="header clearfix">
+
+ 
+    
+
+
+
     <div class="top-header-group">
         <div class="top-header">
             <div class="res_main_logo">
@@ -109,8 +115,19 @@
                             <img src="{{asset('resources\frontend\images/avatar/img-5.jpg')}}" alt="">
                            
 
+                            @if (Auth::check())
                             <span class="user__name">{{Session::get('name')}}</span>
                             <i class="uil uil-angle-down"></i>
+
+                          
+                            @else
+                            <span class="user__name">Hi Guest</span>
+                            <i class="uil uil-angle-down"></i>
+                                
+                            @endif
+
+                           
+
                         </a>
                         <div class="menu dropdown_account">
                             <div class="night_mode_switch__btn">
@@ -140,6 +157,12 @@
             <div class="ui dropdown">
                 <a href="#" class="category_drop hover-btn" data-toggle="modal" data-target="#category_model" title="Categories"><i class="uil uil-apps"></i><span class="cate__icon">Select Category</span></a>
             </div>
+
+
+            
+
+
+
             <nav class="navbar navbar-expand-lg navbar-light py-3" style="margin-bottom: 0px">
                 <div class="container-fluid">
                     <button class="navbar-toggler menu_toggle_btn" type="button" data-target="#navbarSupportedContent"><i class="uil uil-bars"></i></button>
@@ -185,26 +208,125 @@
                     </div>
                 </div>
             </nav>
+
+{{--             
             <div class="catey__icon">
                 <a href="#" class="cate__btn" data-toggle="modal" data-target="#category_model" title="Categories"><i class="uil uil-apps"></i></a>
-            </div>
+            </div> --}}
 
+     
 
             <?php 
+            
             use App\Http\Controllers\ProductController;
             $total= ProductController::cartItem();
+            $product= ProductController::cartList();
             ?>
+
+            
+
 
 
             <div class="header_cart order-1">
                 <a href="" class="cart__btn hover-btn pull-bs-canvas-left" title="Cart"><i class="uil uil-shopping-cart-alt"></i><span>Cart</span><ins>{{$total}}</ins></a>
+                <a href="{{url('checkout')}}" class="cart-checkout-btn hover-btn">Checkout</a>
+
             </div>
-            <div class="search__icon order-1">
-                <a href="#" class="search__btn hover-btn" data-toggle="modal" data-target="#search_model" title="Search"><i class="uil uil-search"></i></a>
-            </div>
+            
         </div>
     </div>
+
+
+
 </header>
+
+
+<!-- Cart Sidebar Offset Start-->
+
+
+    
+<div class="bs-canvas bs-canvas-left position-fixed bg-cart h-100">
+    <div class="bs-canvas-header side-cart-header p-3 ">
+        <div class="d-inline-block  main-cart-title">My Cart <span>({{$total}} Items)</span></div>
+        <button type="button" class="bs-canvas-close close" aria-label="Close"><i class="uil uil-multiply"></i></button>
+    </div> 
+    <div class="bs-canvas-body">
+        <div class="cart-top-total">
+            <div class="cart-total-dil">
+                <h4>Esxence</h4>
+            </div>
+           
+        </div>
+        <div class="side-cart-items">
+
+            @foreach ($product as $item)
+
+            <?php 
+            $price= $item->getProduct->product_selling_price;
+            $discount_price= $item->getProduct->product_discount_price;
+
+            $quantity=$item->product_quantity;
+            $total_price= $price*$quantity;
+            $total_discount_price= $discount_price*$quantity;
+            $total=$total+$total_discount_price ;
+
+
+            ?>
+                
+            <div class="cart-item">
+                <div class="cart-product-img">
+                    <img src="{{$item->getProduct->product_image}}" alt="">
+                </div>
+                <div class="cart-text">
+                    <h4>{{$item->getProduct->product_name}}</h4>
+                 
+                    <div class="qty-group">
+                        <div class="quantity buttons_added">
+                            <h5>{{$item->product_quantity}} Item(s) Added To Cart</h4>
+
+                        </div>
+
+                        <div class="cart-item-price">{{$total_discount_price}}<span>{{$total_price}}</span></div>
+                        
+                    </div>
+
+                    <form action=" {{url('remove_from_cart') }}" method="POST"> 
+                        @csrf                                           
+                         <input type="hidden" name="cart_id" value="{{$item->id}}">
+
+                    
+                    <button type="submit" class="cart-close-btn"><i class="uil uil-multiply"></i></button>
+                
+                    </form>
+                
+                </div>
+            </div>
+
+                        @endforeach
+
+            
+        </div>
+    </div>
+    <div class="bs-canvas-footer">
+      
+        <div class="main-total-cart">
+            <h2>Total Price</h2>
+            <span>{{$total}} BDT</span>
+        </div>
+        <div class="checkout-cart">
+            <a href="#" class="promo-code">Have a promocode?</a>
+            <a href="{{url('checkout')}}" class="cart-checkout-btn hover-btn">Proceed to Checkout</a>
+        </div>
+    </div>
+</div>
+<!-- Cart Sidebar Offsetl End-->
+
+
+
+
+
+
+
 <!-- Header End -->
 
 <!-- Cart Sidebar Offsetl End-->
@@ -350,10 +472,10 @@
 	<!-- Footer End -->
 
 
-
 	<!-- Javascripts -->
 	<script src="{{asset('resources')}}/frontend/js/jquery-3.3.1.min.js?{{time()}}"></script>
-	<script src="{{asset('resources')}}/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js?{{time()}}"></script>
+    <script src="{{asset('resources')}}/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js?{{time()}}"></script>
+    
 	<script src="{{asset('resources')}}/frontend/vendor/OwlCarousel/owl.carousel.js?{{time()}}"></script>
 	<script src="{{asset('resources')}}/frontend/vendor/semantic/semantic.min.js?{{time()}}"></script>
 	<script src="{{asset('resources')}}/frontend/js/jquery.countdown.min.js?{{time()}}"></script>

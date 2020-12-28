@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use  App\Models\category;
 use App\Models\product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\cart;
 
 class ProductController extends Controller
@@ -56,10 +57,7 @@ class ProductController extends Controller
 
         $category= category::get();
         $product= product::find($id);
-        // file_put_contents('product.txt',$product);
-        
-        //   return view('admin.edit_product',['category'=>$category,'product'=>$product]);
-        //   return view('Customer.customer_home')->with (compact('product','category'));
+     
         return view('admin.edit_product')->with (compact('category','product'));
     }
 
@@ -140,22 +138,64 @@ class ProductController extends Controller
             $cart= new cart;
             $cart->user_id=$id;
             $cart->product_id=$request->product_id;
-            $cart->quantity=$request->product_quantity;
+            $cart->product_quantity=$request->product_quantity;
             $cart->save();
 
-            // $cart= cart::where('user_id',$id)->count(); // instead of size of array we can use this
-            // session()->put('cart', $cart);
-           return redirect('/');
+   
+            return back();
         }
         
         else return redirect('sign_in');
     }
 
 
+    public function removeFromCart(Request $req)
+    {
+
+        if (Auth::check()) {
+
+            // $user_id=auth()->user()->id;
+            // $cart_id=$req->cart_id;
+            // cart::where('id',$cart_id)->where('user_id',$user_id)->delete();
+            cart::destroy($req->cart_id);
+
+   
+            return back();
+        }
+        
+        else return redirect('sign_in');
+
+        
+
+    }
+
+
+    /// Showing Number Of Cart
+
     static function cartItem()
     {
-        $id=auth()->user()->id;
-        return cart::where('user_id',$id)->count();
+
+        if(Auth::check())
+
+        {
+            $id=auth()->user()->id;
+            return cart::where('user_id',$id)->count();
+        }
+    }
+
+
+        /// Showing Number Of Cart in Sidebar
+    static function cartList()
+    {
+
+            $user_id=auth()->user()->id;
+    
+            // $product= cart::where('user_id',$user_id)->first();
+            // dd( cart::where('user_id',$user_id)->with('getProduct')->get());
+            $product=cart::where('user_id', $user_id)->orderBy('id','desc')->with('getProduct')->get();
+            return $product;
+       
+        
     }
 
 

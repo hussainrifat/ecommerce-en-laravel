@@ -170,15 +170,37 @@
 										<p>Available<span>(In Stock)</span></p>
 										<a href="{{url('product_view',$product->id)}}"> <h4>{{$product->product_name}}</h4> </a>
 										<div class="product-price">৳{{$product->product_discount_price}} <span>৳{{$product->product_selling_price}}</span></div>
+									
+									
+									
 										<div class="qty-cart">
+
+											<form action=" {{url('add_to_cart') }}" method="POST"> 
+												@csrf                                           
+												 <input type="hidden" name="product_id" value="{{$product->id}}">
+
 											<div class="quantity buttons_added">
-												<input type="button" value="-" class="minus minus-btn">
-												<input type="number" step="1" name="quantity" value="1" class="input-text qty text">
-												<input type="button" value="+" class="plus plus-btn">
+												<div class="quantity buttons_added" name="quantity">
+													<input type="button" value="-" class="minus minus-btn">
+													<input type="number" step="1" value="1" name="product_quantity"   class="input-text qty text">
+													<input type="button" value="+" class="plus plus-btn">
+												</div>
 											</div>
-											<span class="cart-icon"><i class="uil uil-shopping-cart-alt"></i></span>
+											<span style="padding-left: 110px"  class="cart-icon"><button class="quantity buttons_added hover-btn" style="border: black; padding:2px"  type="submit"><i class="uil uil-shopping-cart-alt"></i></span>
+											
+											</form>
 										</div>
+
 									</div>
+
+
+									
+
+
+
+
+
+
 								</div>
 							</div>
 
