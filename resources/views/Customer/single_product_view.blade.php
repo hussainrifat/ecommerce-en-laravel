@@ -27,8 +27,9 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-4">
                                     <div class="item">
-                                        <img src="{{asset($product_details->product_image)}}" style="height:200px">                                    
+                                        <img src="{{asset($product_details->product_image)}}" style="height:200px;font-weight:center">                                    
                                     </div>
+                                    
                                    
                               
                             </div>
@@ -69,11 +70,13 @@
                                         </ul>
                                         <ul class="ordr-crt-share">
                                             <li><button class="add-cart-btn hover-btn" type="submit"><i class="uil uil-shopping-cart-alt" ></i>Add to Cart</button></li>
-                                            <li><button class="order-btn hover-btn">Order Now</button></li>
+                                        </form>
+                                        <a href="{{url('checkout')}}" class="cart-checkout-btn hover-btn">Checkout</a>
                                         </ul>
-                                    </form>
+
 
                                     </div>
+                                    
 
 
 

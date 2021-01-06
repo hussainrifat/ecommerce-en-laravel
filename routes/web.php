@@ -57,8 +57,11 @@ Route::post('remove_from_cart','ProductController@removeFromCart');
 Route::get('/','CustomerController@viewCustomerHome');
 Route::get('/product_view/{id}','CustomerController@showProductView');
 Route::view('/checkout','customer.checkout');
+Route::view('/payment','CustomerController@address');
 
-Route::view('/demo_product','customerdemo_product');
+
+Route::post('payment','CustomerController@payment');
+Route::post('order_confirmation','CustomerController@order');
 
 
 

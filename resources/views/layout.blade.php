@@ -221,6 +221,7 @@
             use App\Http\Controllers\ProductController;
             $total= ProductController::cartItem();
             $product= ProductController::cartList();
+            
             ?>
 
             
@@ -278,8 +279,9 @@
                     <img src="{{$item->getProduct->product_image}}" alt="">
                 </div>
                 <div class="cart-text">
-                    <h4>{{$item->getProduct->product_name}}</h4>
-                 
+                    <a href="{{url('product_view',$item->getProduct->id)}}"> <h4>{{$item->getProduct->product_name}}</h4> </a>
+
+                   
                     <div class="qty-group">
                         <div class="quantity buttons_added">
                             <h5>{{$item->product_quantity}} Item(s) Added To Cart</h4>

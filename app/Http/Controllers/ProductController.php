@@ -126,22 +126,32 @@ class ProductController extends Controller
 
     }
 
-
     public function addToCart(Request $request)
     {
-
 
         if (Auth::check()) {
 
             $id=auth()->user()->id;
 
-            $cart= new cart;
-            $cart->user_id=$id;
-            $cart->product_id=$request->product_id;
-            $cart->product_quantity=$request->product_quantity;
-            $cart->save();
+            if($carts=cart::where('product_id',$request->product_id)->where('user_id',$id)->where('active_status','0')->first())
+            {
+                $old_cart=$carts->product_quantity;
+                $new_cart=$request->product_quantity;
+                $new= $old_cart+$new_cart;
 
-   
+                cart::where('user_id',$id)->where('product_id',$request->product_id)->update(['product_quantity'=>$new]);
+
+            }
+
+            else
+            {
+                cart::create([
+                    'user_id'=>$id,
+                    'product_id'=>$request->product_id,
+                    'product_quantity'=>$request->product_quantity,
+                    ]);
+            }
+
             return back();
         }
         
@@ -179,7 +189,7 @@ class ProductController extends Controller
 
         {
             $id=auth()->user()->id;
-            return cart::where('user_id',$id)->count();
+            return cart::where('user_id',$id)->where('active_status','0')->count();
         }
     }
 
@@ -192,7 +202,7 @@ class ProductController extends Controller
     
             // $product= cart::where('user_id',$user_id)->first();
             // dd( cart::where('user_id',$user_id)->with('getProduct')->get());
-            $product=cart::where('user_id', $user_id)->orderBy('id','desc')->with('getProduct')->get();
+            $product=cart::where('user_id', $user_id)->where('active_status','0')->orderBy('id','desc')->with('getProduct')->get();
             return $product;
        
         
