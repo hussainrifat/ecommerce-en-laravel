@@ -128,9 +128,6 @@ class CustomerController extends Controller
                 'active_status'=>"pending",
                 ]);
     
-
-
-
         order::create([
             'customer_id'=>$customer_id,
             'order_no'=>$order_no,
@@ -142,27 +139,26 @@ class CustomerController extends Controller
             
             $order_no=order::where('customer_id',$customer_id)->where('active_status','pending')->first()->order_no;
 
+            
             $item= cart::where('user_id',$customer_id)->where('active_status','0')->get();
 
-            for($i=0;$i<strlen($item);$i++)
+
+            foreach($item as $item)
+
             {
-                $product_id=$item[$i]->product_id;
-                $product_quantity=$item[$i]->product_quantity;
-
-
-                order_detail::create([
-                    'customer_id'=>$customer_id,
-                    'order_no'=>$order_no,
-                    'product_id'=>$product_id,
-                    'product_quantity'=>$product_quantity,
-                    'active_status'=>"pending",
-                    ]);
+                $order= new order_detail;
+                $order->product_id=$item['product_id'];
+                $order->customer_id=$customer_id;
+                $order->order_no=$order_no;
+                $order->product_quantity=$item['product_quantity'];
+                $order->active_status='pending';
+                $order->save();
 
             }
 
 
 
-            return view('customer.customer_home');
+            return $this->viewCustomerHome($request);
 
 
 
