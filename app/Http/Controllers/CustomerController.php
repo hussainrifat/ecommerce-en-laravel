@@ -156,6 +156,10 @@ class CustomerController extends Controller
 
             }
 
+            cart::where('user_id',$customer_id)->update([
+                'active_status'=>'1'
+                ]);
+
 
 
             return $this->viewCustomerHome($request);

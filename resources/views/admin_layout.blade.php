@@ -116,7 +116,7 @@
 							</a>
                           
 					
-							<a class="nav-link" href="orders.html">
+							<a class="nav-link" href="{{url('admin_order')}}">
 								<div class="sb-nav-link-icon"><i class="fas fa-cart-arrow-down"></i></div>
                                 Orders
 							</a>

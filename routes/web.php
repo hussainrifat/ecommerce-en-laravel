@@ -36,6 +36,7 @@ Route::get('data','productController@cartList' );
 
 // Admin Dashboard
 Route::view("/admin_dashboard", "admin.admin_dashboard");
+Route::get('/admin_order',"AdminController@order");
 
 // Admin Product Pages
 Route::get("/admin_product", "ProductController@allProduct");
@@ -43,6 +44,8 @@ Route::get('add_product','ProductController@addProduct');
 Route::post('add_new_product','ProductController@addNewProduct');
 Route::get('edit_product/{id}','ProductController@editProduct');
 Route::post('update_product/{id}','ProductController@updateProduct');
+Route::get('order_view/{id}','AdminController@orderView');
+
 
 
 // Admin Category Pages

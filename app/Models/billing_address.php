@@ -10,4 +10,10 @@ class billing_address extends Model
     use HasFactory;
     protected $guarded = [];
 
+    function getBillingInfo(){
+        return $this->hasMany(billing_address::class,'billing_id','id');
+    }
+
+    
+
 }

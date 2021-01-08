@@ -197,13 +197,18 @@ class ProductController extends Controller
         /// Showing Number Of Cart in Sidebar
     static function cartList()
     {
-
+        if (Auth::check()) {
             $user_id=auth()->user()->id;
     
             // $product= cart::where('user_id',$user_id)->first();
             // dd( cart::where('user_id',$user_id)->with('getProduct')->get());
-            $product=cart::where('user_id', $user_id)->where('active_status','0')->orderBy('id','desc')->with('getProduct')->get();
+            $product=cart::where('user_id', $user_id)->where('active_status', '0')->orderBy('id', 'desc')->with('getProduct')->get();
             return $product;
+        }
+
+        else {
+            return $product=0;
+        }
        
         
     }
