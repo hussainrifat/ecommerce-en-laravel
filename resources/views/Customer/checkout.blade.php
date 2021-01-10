@@ -256,13 +256,14 @@
                        
                         <div class="main-total-cart">
                             <h2>Total</h2>
-                            <span>{{$total}}</span>
+                            <span>{{$total+60}}</span>
                         </div>
                         <div class="payment-secure">
-                            <i class="uil uil-padlock"></i>Secure checkout
+                            <a href="{{url('secure_payment')}}" class="promo-link45">Secure Checkout</a>
+
                         </div>
                     </div>
-                    <a href="#" class="promo-link45">Have a promocode?</a>
+                    <a href="" class="promo-link45">Have a promocode?</a>
                     <div class="checkout-safety-alerts">
                         <p><i class="uil uil-sync"></i>100% Replacement Guarantee</p>
                         <p><i class="uil uil-check-square"></i>100% Genuine Products</p>

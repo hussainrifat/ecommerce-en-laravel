@@ -34,7 +34,7 @@ class AdminController extends Controller
 
     function orderView($id)
     {
-        $order_details=order::where('id',$id)->with('getUserInfo','getShippingInfo','getBillingInfo')->first();
+        $order_details=order::where('id',$id)->with('getUserInfo','getShippingInfo','getBillingInfo','getDeliveryInfo','getPaymentInfo')->first();
         $order_no= $order_details->order_no;
 
         $product_details=order_detail::where('order_no',$order_no)->with('getOrderProductInfo')->get();
@@ -43,6 +43,25 @@ class AdminController extends Controller
         return view('admin.order_view')->with(compact('order_details','product_details'));
 
         // return $product_details;
+    }
+
+
+    function orderStatus(Request $request){
+        $order_no=$request->order_id;
+        $order_status=$request->order_status;
+
+        
+        order_detail::where('order_no',$order_no)->update([
+                'active_status'=>$order_status]);
+
+     
+
+        order::where('order_no',$order_no)->update(['active_status'=>$request->order_status]);
+        delivery::where('order_no',$order_no)->update(['active_status'=>$request->order_status]);
+        payment::where('order_no',$order_no)->update(['payment_confirmation'=>$request->order_status]);
+
+
+        return back();
     }
     
 }

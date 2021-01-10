@@ -156,7 +156,7 @@
                        
                         <div class="main-total-cart">
                             <h2>Total</h2>
-                            <span>{{$total}}</span>
+                            <span>{{$total+59}}</span>
                         </div>
                         <div class="payment-secure">
                             <i class="uil uil-padlock"></i>Secure checkout

@@ -28,5 +28,14 @@ class order extends Model
     }
 
 
+    function getDeliveryInfo(){
+        return $this->belongsTo(delivery::class,'order_no','order_no');
+    }
+
+    function getPaymentInfo(){
+        return $this->belongsTo(payment::class,'order_no','order_no');
+    }
+
+
   
 }

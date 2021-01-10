@@ -37,6 +37,7 @@ Route::get('data','productController@cartList' );
 // Admin Dashboard
 Route::view("/admin_dashboard", "admin.admin_dashboard");
 Route::get('/admin_order',"AdminController@order");
+Route::post('order_status','AdminController@orderStatus');
 
 // Admin Product Pages
 Route::get("/admin_product", "ProductController@allProduct");
@@ -60,7 +61,8 @@ Route::post('remove_from_cart','ProductController@removeFromCart');
 Route::get('/','CustomerController@viewCustomerHome');
 Route::get('/product_view/{id}','CustomerController@showProductView');
 Route::view('/checkout','customer.checkout');
-Route::view('/payment','CustomerController@address');
+Route::get('/payment','CustomerController@order');
+Route::view('/secure_payment', 'customer.make_payment');
 
 
 Route::post('payment','CustomerController@payment');

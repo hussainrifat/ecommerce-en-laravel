@@ -99,6 +99,8 @@ class CustomerController extends Controller
 
         }
 
+
+
             
    
             return view('customer.make_payment');
@@ -123,7 +125,28 @@ class CustomerController extends Controller
             'payment_confirmation'=>"pending",
             ]);
 
-            delivery::create([
+
+            $item= cart::where('user_id',$customer_id)->where('active_status','0')->get();
+            // file_put_contents('item.txt',$item);
+
+
+            foreach($item as $item)
+
+            {
+             
+                order_detail::create([
+                    'customer_id'=>$customer_id,
+                    'order_no'=>$order_no,
+                    'product_id'=>$item['product_id'],
+                    'product_quantity'=>$item['product_quantity'],
+                    'active_status'=>"pending",
+                    ]);
+                    // file_put_contents('item1.txt',"working");
+
+
+            }
+
+        delivery::create([
                 'order_no'=>$order_no,
                 'active_status'=>"pending",
                 ]);
@@ -140,21 +163,7 @@ class CustomerController extends Controller
             $order_no=order::where('customer_id',$customer_id)->where('active_status','pending')->first()->order_no;
 
             
-            $item= cart::where('user_id',$customer_id)->where('active_status','0')->get();
-
-
-            foreach($item as $item)
-
-            {
-                $order= new order_detail;
-                $order->product_id=$item['product_id'];
-                $order->customer_id=$customer_id;
-                $order->order_no=$order_no;
-                $order->product_quantity=$item['product_quantity'];
-                $order->active_status='pending';
-                $order->save();
-
-            }
+      
 
             cart::where('user_id',$customer_id)->update([
                 'active_status'=>'1'
@@ -162,8 +171,7 @@ class CustomerController extends Controller
 
 
 
-            return $this->viewCustomerHome($request);
-
+return redirect('/');
 
 
     }
